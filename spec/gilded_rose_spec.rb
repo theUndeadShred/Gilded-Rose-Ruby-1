@@ -125,7 +125,7 @@ RSpec.describe GildedRose do
 
   context "Backstage Pass" do
     it "long before sell date" do
-      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 11, quality: 10, attributes: [])
+      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 11, quality: 10, attributes: ['ticket'])
 
       gilded_rose.tick
 
@@ -133,7 +133,7 @@ RSpec.describe GildedRose do
     end
 
     it "long before sell date at max quality" do
-      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 11, quality: 50, attributes: [])
+      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 11, quality: 50, attributes: ['ticket'])
 
       gilded_rose.tick
 
@@ -141,7 +141,7 @@ RSpec.describe GildedRose do
     end
 
     it "medium close to sell date upper bound" do
-      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 10, quality: 10, attributes: [])
+      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 10, quality: 10, attributes: ['ticket'])
 
       gilded_rose.tick
 
@@ -149,7 +149,7 @@ RSpec.describe GildedRose do
     end
 
     it "medium close to sell date upper bound at max quality" do
-      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 10, quality: 50, attributes: [])
+      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 10, quality: 50, attributes: ['ticket'])
 
       gilded_rose.tick
 
@@ -157,7 +157,7 @@ RSpec.describe GildedRose do
     end
 
     it "medium close to sell date lower bound" do
-      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 6, quality: 10, attributes: [])
+      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 6, quality: 10, attributes: ['ticket'])
 
       gilded_rose.tick
 
@@ -165,7 +165,7 @@ RSpec.describe GildedRose do
     end
 
     it "medium close to sell date lower bound at max quality" do
-      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 6, quality: 50, attributes: [])
+      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 6, quality: 50, attributes: ['ticket'])
 
       gilded_rose.tick
 
@@ -173,7 +173,7 @@ RSpec.describe GildedRose do
     end
 
     it "very close to sell date upper bound" do
-      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 5, quality: 10, attributes: [])
+      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 5, quality: 10, attributes: ['ticket'])
 
       gilded_rose.tick
 
@@ -181,7 +181,7 @@ RSpec.describe GildedRose do
     end
 
     it "very close to sell date upper bound at max quality" do
-      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 5, quality: 50, attributes: [])
+      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 5, quality: 50, attributes: ['ticket'])
 
       gilded_rose.tick
 
@@ -189,7 +189,7 @@ RSpec.describe GildedRose do
     end
 
     it "very close to sell date lower bound" do
-      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 1, quality: 10, attributes: [])
+      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 1, quality: 10, attributes: ['ticket'])
 
       gilded_rose.tick
 
@@ -197,7 +197,7 @@ RSpec.describe GildedRose do
     end
 
     it "very close to sell date lower bound at max quality" do
-      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 1, quality: 50, attributes: [])
+      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 1, quality: 50, attributes: ['ticket'])
 
       gilded_rose.tick
 
@@ -205,7 +205,7 @@ RSpec.describe GildedRose do
     end
 
     it "on sell date" do
-      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 0, quality: 10, attributes: [])
+      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: 0, quality: 10, attributes: ['ticket'])
 
       gilded_rose.tick
 
@@ -213,7 +213,7 @@ RSpec.describe GildedRose do
     end
 
     it "after sell date" do
-      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: -10, quality: 10, attributes: [])
+      gilded_rose = GildedRose.new(name: "Backstage passes to a TAFKAL80ETC concert", days_remaining: -10, quality: 10, attributes: ['ticket'])
 
       gilded_rose.tick
 

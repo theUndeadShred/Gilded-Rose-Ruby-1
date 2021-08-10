@@ -33,7 +33,7 @@ class GildedRose
   end
 
   def tick
-    if !@attributes.include? 'aged' and @name != "Backstage passes to a TAFKAL80ETC concert"
+    if !@attributes.include? 'aged' and !@attributes.include? 'ticket'
       if @quality > 0
         if !@attributes.include? 'legendary'
           @quality = @quality - 1
@@ -42,7 +42,7 @@ class GildedRose
     else
       if @quality < 50
         @quality = @quality + 1
-        if @name == "Backstage passes to a TAFKAL80ETC concert"
+        if @attributes.include? 'ticket'
           if @days_remaining < 11
             if @quality < 50
               @quality = @quality + 1
@@ -61,7 +61,7 @@ class GildedRose
     end
     if @days_remaining < 0
       if !@attributes.include? 'aged'
-        if @name != "Backstage passes to a TAFKAL80ETC concert"
+        if !@attributes.include? 'ticket'
           if @quality > 0
             if !@attributes.include? 'legendary'
               @quality = @quality - 1
