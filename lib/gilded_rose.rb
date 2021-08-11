@@ -29,51 +29,88 @@ class GildedRose
     @quality = quality
 
     # an array of distinctions that change how time affects quality
-    @attributes = attributes 
+    # possible entries = [ 'legendary', 'aged', 'ticket', 'conjured' ]
+    @attributes = attributes.to_set
   end
 
   def tick
-    if !@attributes.include? 'aged' and !@attributes.include? 'ticket'
-      if @quality > 0
-        if !@attributes.include? 'legendary'
-          @quality = @quality - 1
-        end
-      end
-    else
+    puts "Processing item: #{@name}"
+
+    handleStandardItem if @attributes.empty?
+    handleAged if @attributes.include? 'aged'
+    handleLegendary if @attributes.include? 'legendary'
+    handleTicket if @attributes.include? 'ticket'
+    handleConjured if @attributes.include? 'conjured'
+
+    puts "Item processed: #{self.inspect}"
+  end
+
+  private
+
+  def handleStandardItem
+    handleStandardDegredation
+  end
+
+  def handleAged
+    # aged items cannot exceed quality of 50
+    if @quality < 50
+      @quality = @quality + 1
+    end
+
+    @days_remaining = @days_remaining - 1
+    if @days_remaining < 0
       if @quality < 50
         @quality = @quality + 1
-        if @attributes.include? 'ticket'
-          if @days_remaining < 11
-            if @quality < 50
-              @quality = @quality + 1
-            end
-          end
-          if @days_remaining < 6
-            if @quality < 50
-              @quality = @quality + 1
-            end
-          end
-        end
       end
     end
-    if !@attributes.include? 'legendary'
-      @days_remaining = @days_remaining - 1
-    end
-    if @days_remaining < 0
-      if !@attributes.include? 'aged'
-        if !@attributes.include? 'ticket'
-          if @quality > 0
-            if !@attributes.include? 'legendary'
-              @quality = @quality - 1
-            end
-          end
-        else
-          @quality = @quality - @quality
-        end
-      else
+  end
+
+  def handleLegendary
+    # No Op - legendary items remain unchanged
+  end
+
+  def handleTicket
+    if @quality < 50
+      @quality = @quality + 1
+
+      if @days_remaining < 11
         if @quality < 50
           @quality = @quality + 1
         end
+      end
+      
+      if @days_remaining < 6
+        if @quality < 50
+          @quality = @quality + 1
+        end
+      end
+    end
+
+    @days_remaining = @days_remaining - 1
+
+    if @days_remaining < 0
+      @quality = 0
+      return
+    end
+  end
+
+  # Identical behavior to standard item with exeption of degradation rate
+  # Utilizes abstracted 'handleStandardDegradation' method
+  def handleConjured
+    handleStandardDegredation(2)
+  end
+
+  # handles standard degrading item behavior
+  # takes param 'decrementValue' to affect rate of degradation
+  def handleStandardDegredation(decrementValue = 1)
+    if @quality > 0
+      @quality = @quality - decrementValue
+    end
+
+    @days_remaining = @days_remaining - 1
+    if @days_remaining < 0
+      if @quality > 0
+        @quality = @quality - decrementValue
       end
     end
   end
